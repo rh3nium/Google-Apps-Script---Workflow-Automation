@@ -1,8 +1,6 @@
 /**
  * Map numeric marks in column C to grades in column D using:
  * A >= 85, B: 70-84, C: 55-69, D: 40-54, F < 40
- * Demonstrates getRange().getValues(), loop, if-else mapping,
- * array building, and setValues().
  */
 
 function calculateGrades() {
@@ -36,7 +34,6 @@ function calculateGrades() {
 
 /**
  * Convert a single cell value to a grade string.
- * Adjust thresholds as per your institutional policy.
  */
 function toGrade(value) {
   const n = Number(value);
