@@ -1,7 +1,9 @@
+// Get content from HTML file to create webpage
 function doGet(e) {
   return HtmlService.createHtmlOutputFromFile('ExpenseTracker');
 }
 
+// Append expense in sheet
 function recordExpense(p, a, m) {
   var ss = SpreadsheetApp.openByUrl('your_sheet_url'); // Add your sheet url
   var sheet = ss.getSheetByName('Sheet1'); // Add your sheet name
@@ -16,6 +18,7 @@ function recordExpense(p, a, m) {
   MailApp.sendEmail('niteeshkr@pes.edu', 'New Expense on Form', body);
 }
 
+// Get total expense
 function getTotalExpenses() {
   var ss = SpreadsheetApp.openByUrl('your_sheet_url'); // Add your sheet url
   var sheet = ss.getSheetByName('Sheet1'); // Add your sheet name
@@ -25,6 +28,7 @@ function getTotalExpenses() {
   return totalAmount;
 }
 
+// Get all data
 function getAllData() {
   var ss = SpreadsheetApp.openByUrl('your_sheet_url'); // Add your sheet url
   var sheet = ss.getSheetByName('Sheet1'); // Add your sheet name
