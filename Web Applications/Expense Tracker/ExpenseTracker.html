@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script>
+      window.onload = function() {
+        google.script.run
+        .withSuccessHandler(total => {
+          document.getElementById('total').textContent = total;
+        }).getTotalExpenses();
+        google.script.run
+        .withSuccessHandler(data => {
+          document.getElementById('allData').textContent = data;
+        })
+        .getAllData();
+      }
+      function getData(e) {
+        e.preventDefault();
+        const particulars = document.getElementById('particulars').value;
+        const amount = document.getElementById('amount').value;
+        const paymentMode = document.querySelector('input[name="paymentMode"]:checked')?.value || '';
+        google.script.run
+        .withSuccessHandler(() => {
+          alert("Success");
+          document.getElementById('expenseForm').reset();
+        })
+        .withFailureHandler(() => {alert('Failure')})
+        .recordExpense(particulars, amount, paymentMode);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Expense Tracker</h1><br><br>
+    Total Spends: <label id="total"></label><br><br>
+    Old Expenses: <label id="allData"></label><br><br>
+
+    <form id="expenseForm" onsubmit="getData(event)">
+      Particulars <br><br>
+      <input type="text" required id="particulars">
+      <br><br>
+      Amount <br><br>
+      <input type="number" required id="amount">
+      <br><br>
+      Payment Mode <br><br>
+      <input type="radio" id="cash" name="paymentMode" value="Cash">Cash<br>
+      <input type="radio" id="bank" name="paymentMode" value="Bank">Bank<br>
+      <input type="radio" id="cc1" name="paymentMode" value="Credit Card 1">Credit Card 1<br>
+      <input type="radio" id="cc2" name="paymentMode" value="Credit Card 2">Credit Card 2<br>
+      <br>
+      <input type="submit" value="Submit Entry">
+    </form> 
+  </body>
+</html>
