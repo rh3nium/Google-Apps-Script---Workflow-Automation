@@ -3,7 +3,7 @@ function doGet(e) {
 }
 
 function recordExpense(p, a, m) {
-  var ss = SpreadsheetApp.openByUrl('https://docs.google.com/spreadsheets/d/1rGAD13eVySl38mdLGmQJFMqFS3YEGpk7RkDV17gRWxw/');
+  var ss = SpreadsheetApp.openByUrl('your_sheet_url');
   var sheet = ss.getSheetByName('Sheet1');
   var old_amount = 0;
   var slno = sheet.getLastRow();
@@ -17,7 +17,7 @@ function recordExpense(p, a, m) {
 }
 
 function getTotalExpenses() {
-  var ss = SpreadsheetApp.openByUrl('https://docs.google.com/spreadsheets/d/1rGAD13eVySl38mdLGmQJFMqFS3YEGpk7RkDV17gRWxw/');
+  var ss = SpreadsheetApp.openByUrl('your_sheet_url');
   var sheet = ss.getSheetByName('Sheet1');
   var totalAmount = 0;
   var data = sheet.getRange(2, 3, sheet.getLastRow() - 1, 1).getValues();
@@ -26,7 +26,7 @@ function getTotalExpenses() {
 }
 
 function getAllData() {
-  var ss = SpreadsheetApp.openByUrl('https://docs.google.com/spreadsheets/d/1rGAD13eVySl38mdLGmQJFMqFS3YEGpk7RkDV17gRWxw/');
+  var ss = SpreadsheetApp.openByUrl('your_sheet_url');
   var sheet = ss.getSheetByName('Sheet1');
   var data = sheet.getRange(1, 1, sheet.getLastRow(), sheet.getLastColumn()).getValues();
   return data;
