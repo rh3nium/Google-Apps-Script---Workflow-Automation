@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script>
+      function getData(e) {
+        e.preventDefault();
+        const name = document.getElementById("username").value;
+        const feedback = document.getElementById("feedback").value;
+        google.script.run
+        .withSuccessHandler(() => {
+          alert("Success");
+          document.getElementById("myform").reset();
+        })
+        .withFailureHandler(() => {alert("Failure")})
+        .sendToSheet(name, feedback)
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Simple Feedback Form</h1>
+    <form id="myform" onsubmit="getData(event)">
+      Name: <input type="text" id="username">
+      <br><br>
+      Feedback: <input type="text" id="feedback">
+      <br><br>
+      <input type="submit" value="Send Feedback" onsubmit="getData(event)">
+    </form>
+  </body>
+</html>
