@@ -1,29 +1,17 @@
-// Code.gs
-function doGet() {
-  return HtmlService.createTemplateFromFile('Form').evaluate();
-}
-
-// Ensure the function is defined with 3 parameters
-function sendToSheet(name, email, rating) { 
-  const SS_ID = 'YOUR_SHEET_ID'; // Replace with your sheet ID
-  const SHEET_NAME = 'Sheet1';              
-
-  try {
-    const ss = SpreadsheetApp.openById(SS_ID);
-    const sheet = ss.getSheetByName(SHEET_NAME);
-
-    if (!sheet) {
-      throw new Error('Sheet not found: ' + SHEET_NAME + '. Check the sheet name.');
-    }
-
-    // Append all three values
-    const row = [new Date(), name, email, rating]; 
-    sheet.appendRow(row);
-
-    Logger.log('Successfully recorded: ' + row.join(', '));
-
-  } catch (e) {
-    Logger.log('Error in sendToSheet: ' + e.toString());
-    throw new Error('Could not save data: ' + e.message);
-  }
+function recordDataAndSendEmails(name, email, feedback, rating) {
+  var id = 'YOUR_SHEET_ID';
+  var ss = SpreadsheetApp.openById(id);
+  var sheet = ss.getSheetByName('Sheet1');
+  var body = 'Here is your feedback: \nName: ' + name + '\nEmail: ' + email + '\nFeedback: ' + feedback + '\nRating: ' + rating + '\nThank You';
+  MailApp.sendEmail(email, 'Feedback Recorded', body);
+  sheet.appendRow([name, email, feedback, rating]);
+  var totalRating = 0;
+  var data = sheet.getRange(2, 4, sheet.getLastRow() - 1, 1).getValues();
+  data.forEach(row => {
+    totalRating += row[0];
+  });
+  var totalCount = sheet.getLastRow() - 1;
+  var averageRating = totalRating / totalCount;
+  var adminMailBody = 'New Response by ' + name + '\nTotal Responses: ' + totalCount + '\nAverage Rating: ' + averageRating;
+  MailApp.sendEmail('halbhaviriya@gmail.com', 'New Response Recorded - Latest Statistics', adminMailBody);
 }
