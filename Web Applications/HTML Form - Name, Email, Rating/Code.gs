@@ -13,5 +13,5 @@ function recordDataAndSendEmails(name, email, feedback, rating) {
   var totalCount = sheet.getLastRow() - 1;
   var averageRating = totalRating / totalCount;
   var adminMailBody = 'New Response by ' + name + '\nTotal Responses: ' + totalCount + '\nAverage Rating: ' + averageRating;
-  MailApp.sendEmail('halbhaviriya@gmail.com', 'New Response Recorded - Latest Statistics', adminMailBody);
+  MailApp.sendEmail('your_email@gmail.com', 'New Response Recorded - Latest Statistics', adminMailBody);
 }
