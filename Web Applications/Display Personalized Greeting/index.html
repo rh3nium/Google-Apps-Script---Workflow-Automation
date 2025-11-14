@@ -1,0 +1,37 @@
+<!-- Greeter Application -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script>
+      function sendToGAS(e) {
+        e.preventDefault();
+        
+        /* Get the Name through Form, convert to uppercase */
+        const name = document.getElementById('nameTextBox').value;
+
+        google.script.run
+          .withSuccessHandler(upperName => {
+            document.getElementById('name').textContent = 'Hello, ' + upperName + '!';
+            document.getElementById('myform').reset();
+          })
+          .withFailureHandler(() => alert("Failure"))
+          .returnUpper(name);
+      }
+    </script>
+  </head>
+
+  <body>
+    <h1>Greeter Form</h1>
+    
+    /* Display on Web page using a label, dynamically updated */
+    <form onsubmit="sendToGAS(event)" id="myform">
+      Name: <br><br>
+      <input type="text" id="nameTextBox" required><br><br>
+      <input type="submit" value="Submit">
+    </form>
+
+    <br><br>
+    <label id="name"></label>
+  </body>
+</html>
